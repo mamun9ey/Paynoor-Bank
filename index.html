@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paynoor Bank</title>
+   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login-area">
+    <h1 class="text-center">Welcome to Paynoor Bank</h1>
+    <div class="submit-area">
+        <h4>Login</h4>
+        <input type="text" class="form-control" placeholder="Enter your email here">
+        <br>
+       <input type="password" class="form-control" name="" id="" placeholder="Password">
+    </br>
+       <button id="login" class="btn btn-success">Enter</button>
+    </div>
+</div>
+<div id="transaction-area">
+    <!--deposit,withdraw and balance start-->
+    <div class="row">
+    <div class="col-md-4">
+       <div class="deposit status">
+       <h5>Deposit</h5>
+       <h2>$ <span id="currentDeposit">00</span></h2>
+       </div>
+    </div>
+    <div class="col-md-4">
+        <div class="withdraw status">
+            <h5>Withdraw</h5>
+            <h2>$ <span id="currentWithdraw">00</span></h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="balance status">
+            <h5>Balance</h5>
+            <h2>$ <span id="currentBalance">1240</span></h2>
+            </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="submit-area">
+         <h4>Deposit</h4>
+         <input type="number" class="from-control" placeholder="$ amount you want to deposit " id="depositAmount">
+        </br>
+         <button class="btn btn-success" id="addDeposit">Deposit</button>
+        
+       </div>
+    </div>
+    <div class="col-md-6">
+        <div class="submit-area">
+            <h4>Withdraw</h4>
+            <input id="withdrawAmount"type="text" class="from-control" placeholder="$ amount you want to withdraw">
+        </br>
+            <button id="addWithdraw" class="btn btn-success">Withdraw</button>
+       
+        </div>
+    </div>
+</div>
+  <!-- Deposit and Withdraw section end -->
+</div>
+<script>
+    // login button start
+     const loginBtn = document.getElementById("login");
+    loginBtn.addEventListener("click",function(){
+       const loginArea = document.getElementById("login-area");
+       loginArea.style.display ="none";
+       const transactionArea =document.getElementById("transaction-area");
+       transactionArea.style.display ="block";
+    })
+      // login button end
+
+       // diposit button event handler start
+       const addDeposit = document.getElementById("addDeposit");
+            addDeposit.addEventListener("click",function(){
+                
+                const depositNumber = getInputNumber("depositAmount");
+
+                updateSpanText("currentDeposit", depositNumber);
+                updateSpanText("currentBalance", depositNumber);
+            
+                
+            })
+        // diposit button event handler end
+
+        // Withdraw button event handler start
+            const addWithdraw = document.getElementById("addWithdraw");
+            addWithdraw.addEventListener("click",function(){
+               
+               const withdrawNumber = getInputNumber("withdrawAmount");
+
+                updateSpanText("currentWithdraw",withdrawNumber);
+                updateSpanText("currentBalance", -1 * withdrawNumber);
+            })
+        // Withdraw button event handler end
+
+
+        // common function start
+
+                function getInputNumber(id) {
+                    const Amount = document.getElementById(id).value;
+                    const Number = parseFloat(Amount);
+                    return Number
+                }
+
+                function updateSpanText(id,depositNumber) {
+                    const Balance = document.getElementById(id).innerText;
+                    const BalanceNumber = parseFloat(Balance);
+                    const totalBalance = depositNumber + BalanceNumber;
+                    document.getElementById(id).innerText = totalBalance;
+                }
+        // common functionn end
+   
+</script>
+</body>
+</html>
